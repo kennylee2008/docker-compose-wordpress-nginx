@@ -1,0 +1,12 @@
+version: '3.8'
+
+services:
+
+  certbot:
+    image: certbot/certbot:v1.17.0
+    container_name: certbot
+    command: certonly --standalone --preferred-challenges http -d ${DOMAIN_NAME} -d www.${DOMAIN_NAME} --non-interactive --agree-tos --register-unsafely-without-email
+    ports:
+      - '80:80'
+    volumes:
+      - ./certs:/etc/letsencrypt
